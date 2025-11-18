@@ -7,19 +7,14 @@ Type=simple
 User=root
 Group=root
 
-# Path to your exporter (modify if needed)
-ExecStart=/usr/bin/python3 /opt/cpanel-exporter/cpanel_exporter.py --host 0.0.0.0 --port 9123
+WorkingDirectory=/opt/cpanel_exporter
+ExecStart=/usr/bin/python3 /opt/cpanel_exporter/cpanel_exporter.py --host 0.0.0.0 --port 9123
 
-# Restart on crash
 Restart=always
 RestartSec=3
 
-# Environment to avoid locale issues
 Environment=LC_ALL=C.UTF-8
 Environment=LANG=C.UTF-8
-
-# Allow UAPI/WHM API tools
-WorkingDirectory=/opt/cpanel-exporter
 
 [Install]
 WantedBy=multi-user.target
