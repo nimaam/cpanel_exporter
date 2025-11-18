@@ -16,45 +16,20 @@ The **cPanel Prometheus Exporter** is a small Python/Flask service that:
 
 ***Get the code***
 ```
-mkdir -p /opt/cpanel-exporter
-cd /opt/cpanel-exporter
+mkdir -p /opt/cpanel_exporter
+cd /opt/cpanel_exporter
 git clonehttps://github.com/nimaam/cpanel_exporter .
 ```
 
 ***Installation the requirements:***
 ```
 python3 -m pip install --upgrade pip
-python3 -m pip install flask
+python3 -m pip install -r requirements.txt
 ```
 
 ***Add the services:***
 ```
-nano /etc/systemd/system/cpanel-exporter.service
-```
-
-***cpanel-exporter.service file:***
-```
-[Unit]
-Description=Prometheus cPanel Exporter (All Users)
-After=network.target
-
-[Service]
-Type=simple
-User=root
-Group=root
-
-ExecStart=/usr/bin/python3 /opt/cpanel-exporter/cpanel_exporter.py --host 0.0.0.0 --port 9123
-
-WorkingDirectory=/opt/cpanel-exporter
-
-Restart=always
-RestartSec=3
-
-Environment=LC_ALL=C.UTF-8
-Environment=LANG=C.UTF-8
-
-[Install]
-WantedBy=multi-user.target
+mv cpanel_exporter.service /etc/systemd/system/cpanel_exporter.service
 ```
 
 ***configure and enable the service:***
